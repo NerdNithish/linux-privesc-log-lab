@@ -1,0 +1,5 @@
+✔ /etc/shadow read as root using sudo
+✔ Reverse shell persisted via cronjob
+✔ Fake "Accepted password" inserted into auth.log
+✔ Shadow file exfiltrated to attacker machine
+✔ Cleaned cronjob, shell script, and logs

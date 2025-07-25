@@ -1,0 +1,8 @@
+🕓 Timeline of Attack
+
+[10:00] Enumerated sudo permissions → Found NOPASSWD: /bin/cat
+[10:05] Read /etc/shadow using GTFOBin sudo + cat trick
+[10:08] Dropped reverse shell in cron using /tmp/.stealth.sh
+[10:10] Injected fake root login into /var/log/auth.log
+[10:15] Exfiltrated /etc/shadow using netcat with base64
+[10:20] Deleted cronjob, cleaned logs, removed shell script
