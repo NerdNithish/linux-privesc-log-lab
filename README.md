@@ -39,9 +39,7 @@ See `proof.txt` for summary of achieved outcomes
 
 ---
 
-## 🛡️ Blue Team Detection Strategy (Optional)
-
-Add `detection_logic.txt` if you'd like to include:
+## 🛡️ Blue Team Detection Strategy
 
 - `grep -Ei 'bash|/dev/tcp' /var/log/auth.log`
 - `sudo ausearch -f /etc/shadow`
